@@ -24,7 +24,7 @@
 
 // MARK: Splash
 "Splash.Preloader1" = "Checking your account...";
-"Splash.Preloader2" = "Syncing the yoga library";
+"Splash.Preloader2" = "Syncing the library";
 "Splash.Preloader3" = "Setting up your account...";
 
 // MARK: Paygate
@@ -50,6 +50,13 @@
 // MARK: Onboarding
 "Onboarding.Welcome.Title" = "WELCOME TO\nFITNESS APP";
 "Onboarding.Welcome.Button" = "Start now";
+"Onboarding.FitnessGroup.Title" = "Choose your fitness group";
+"Onboarding.FitnessGroup.SubTitle" = "You can change the group in the settings later";
+"Onboarding.FitnessGroup.Calisthenics" = "Calisthenics";
+"Onboarding.FitnessGroup.ChairYoga" = "Chair Yoga";
+"Onboarding.FitnessGroup.Somatic" = "Somatic";
+"Onboarding.FitnessGroup.Stretching" = "Stretching";
+"Onboarding.FitnessGroup.WallPilates" = "Wall Pilates";
 "Onboarding.Gender.Title" = "What is your gender?";
 "Onboarding.Gender.Male" = "Male";
 "Onboarding.Gender.Female" = "Female";

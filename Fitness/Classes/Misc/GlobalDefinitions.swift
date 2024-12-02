@@ -9,8 +9,8 @@ import Foundation
 
 // TODO
 final class GlobalDefinitions {
-    static let domain = "https://yoga.korrekted.com"
-    static let apiKey = "VVPAhTnVXD3b43m7nB24"
+    static let domain = FitnessGroup.current.domain
+    static let apiKey = FitnessGroup.current.apiKey
     
     static let otterScaleHost = "https://api.korrekted.com"
     static let otterScaleApiKey = "AfQhRjznT7gyI96w"
@@ -22,6 +22,7 @@ final class GlobalDefinitions {
     static let privacyPolicyUrl = URL(string: "https://coffeestop-ou.com/policy.html")!
     static let contactUsUrl = URL(string: "https://coffeestop-ou.com/contacts.html")!
     
+    // TODO: продукты для этого приложения зашиты в приложения, сделать актуальными
     enum Paygate {
         static let defaultLifetime = "train.pilates.endless"
         static let defaultMonthly = "train.pilates.monthly"

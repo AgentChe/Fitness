@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8C5B092C35062DCE913E6F87 /* Pods_Fitness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6872A514EEE7740F6E290DE /* Pods_Fitness.framework */; };
+		DE8820CE2CFDBB9E0050F07F /* FitnessGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820CD2CFDBB9E0050F07F /* FitnessGroup.swift */; };
+		DE8820D12CFDCF060050F07F /* OFitnessGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D02CFDCF060050F07F /* OFitnessGroupView.swift */; };
+		DE8820D32CFDD4280050F07F /* OFitnessGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D22CFDD4280050F07F /* OFitnessGroupButton.swift */; };
 		DECA87F42CF9D17600BA5090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DECA87EF2CF9D17600BA5090 /* Assets.xcassets */; };
 		DECA87F62CF9D17600BA5090 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DECA87F22CF9D17600BA5090 /* LaunchScreen.storyboard */; };
 		DECA89AF2CF9D2F300BA5090 /* LogDrillProgressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA894A2CF9D2F300BA5090 /* LogDrillProgressResponse.swift */; };
@@ -222,7 +225,6 @@
 		DECA8A802CF9D2F300BA5090 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89872CF9D2F300BA5090 /* SessionManager.swift */; };
 		DECA8A812CF9D2F300BA5090 /* DrillTrainingResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88502CF9D2F300BA5090 /* DrillTrainingResultViewModel.swift */; };
 		DECA8A822CF9D2F300BA5090 /* WorkoutTrainingLifeCyrcle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89172CF9D2F300BA5090 /* WorkoutTrainingLifeCyrcle.swift */; };
-		DECA8A832CF9D2F300BA5090 /* GetPaygateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89582CF9D2F300BA5090 /* GetPaygateResponse.swift */; };
 		DECA8A842CF9D2F300BA5090 /* ExerciseInstructionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89002CF9D2F300BA5090 /* ExerciseInstructionViewModel.swift */; };
 		DECA8A852CF9D2F300BA5090 /* HomeNoTrainingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88782CF9D2F300BA5090 /* HomeNoTrainingsCell.swift */; };
 		DECA8A862CF9D2F300BA5090 /* GetWorkoutTemplateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA899E2CF9D2F300BA5090 /* GetWorkoutTemplateResponse.swift */; };
@@ -259,7 +261,6 @@
 		DECA8AA52CF9D2F300BA5090 /* OPreloaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88A02CF9D2F300BA5090 /* OPreloaderView.swift */; };
 		DECA8AA62CF9D2F300BA5090 /* PaygateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88AF2CF9D2F300BA5090 /* PaygateInteractor.swift */; };
 		DECA8AA72CF9D2F300BA5090 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA87FC2CF9D2F300BA5090 /* ImagePicker.swift */; };
-		DECA8AA82CF9D2F300BA5090 /* PaygateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA895B2CF9D2F300BA5090 /* PaygateManager.swift */; };
 		DECA8AA92CF9D2F300BA5090 /* HomeDrillCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA886A2CF9D2F300BA5090 /* HomeDrillCategoriesCollectionView.swift */; };
 		DECA8AAA2CF9D2F300BA5090 /* WorkoutTrainingAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89202CF9D2F300BA5090 /* WorkoutTrainingAssembly.swift */; };
 		DECA8AAB2CF9D2F300BA5090 /* PaygateOptionConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89542CF9D2F300BA5090 /* PaygateOptionConfig.swift */; };
@@ -291,7 +292,6 @@
 		DECA8AC52CF9D2F300BA5090 /* GlobalDefinitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA882F2CF9D2F300BA5090 /* GlobalDefinitions.swift */; };
 		DECA8AC62CF9D2F300BA5090 /* HomeWorkoutsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88742CF9D2F300BA5090 /* HomeWorkoutsCell.swift */; };
 		DECA8AC72CF9D2F300BA5090 /* WorkoutTrainingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89232CF9D2F300BA5090 /* WorkoutTrainingViewModel.swift */; };
-		DECA8AC82CF9D2F300BA5090 /* GetPaygateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89572CF9D2F300BA5090 /* GetPaygateRequest.swift */; };
 		DECA8AC92CF9D2F300BA5090 /* GetWorkoutStepsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA899B2CF9D2F300BA5090 /* GetWorkoutStepsResponse.swift */; };
 		DECA8ACA2CF9D2F300BA5090 /* DailyPicksTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88662CF9D2F300BA5090 /* DailyPicksTableCell.swift */; };
 		DECA8ACB2CF9D2F300BA5090 /* DTIButtonsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88522CF9D2F300BA5090 /* DTIButtonsCell.swift */; };
@@ -332,6 +332,9 @@
 		75F2824DF77826FEE64EC879 /* Pods-Fitness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness.debug.xcconfig"; path = "Target Support Files/Pods-Fitness/Pods-Fitness.debug.xcconfig"; sourceTree = "<group>"; };
 		A6872A514EEE7740F6E290DE /* Pods_Fitness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB09F0A2229834F8CFEF47FD /* Pods-Fitness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness.release.xcconfig"; path = "Target Support Files/Pods-Fitness/Pods-Fitness.release.xcconfig"; sourceTree = "<group>"; };
+		DE8820CD2CFDBB9E0050F07F /* FitnessGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessGroup.swift; sourceTree = "<group>"; };
+		DE8820D02CFDCF060050F07F /* OFitnessGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFitnessGroupView.swift; sourceTree = "<group>"; };
+		DE8820D22CFDD4280050F07F /* OFitnessGroupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFitnessGroupButton.swift; sourceTree = "<group>"; };
 		DECA87D72CF9D14100BA5090 /* Fitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DECA87EF2CF9D17600BA5090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DECA87F02CF9D17600BA5090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -583,9 +586,6 @@
 		DECA89532CF9D2F300BA5090 /* Paygate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paygate.swift; sourceTree = "<group>"; };
 		DECA89542CF9D2F300BA5090 /* PaygateOptionConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateOptionConfig.swift; sourceTree = "<group>"; };
 		DECA89552CF9D2F300BA5090 /* PaygateOptionLineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateOptionLineComponent.swift; sourceTree = "<group>"; };
-		DECA89572CF9D2F300BA5090 /* GetPaygateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPaygateRequest.swift; sourceTree = "<group>"; };
-		DECA89582CF9D2F300BA5090 /* GetPaygateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPaygateResponse.swift; sourceTree = "<group>"; };
-		DECA895B2CF9D2F300BA5090 /* PaygateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateManager.swift; sourceTree = "<group>"; };
 		DECA895D2CF9D2F300BA5090 /* PlanDrill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanDrill.swift; sourceTree = "<group>"; };
 		DECA895E2CF9D2F300BA5090 /* PlanOnDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanOnDay.swift; sourceTree = "<group>"; };
 		DECA895F2CF9D2F300BA5090 /* PlanStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanStatus.swift; sourceTree = "<group>"; };
@@ -850,6 +850,7 @@
 				DECA882E2CF9D2F300BA5090 /* Appearance.swift */,
 				DECA882F2CF9D2F300BA5090 /* GlobalDefinitions.swift */,
 				DECA88302CF9D2F300BA5090 /* SceneDelegate.swift */,
+				DE8820CD2CFDBB9E0050F07F /* FitnessGroup.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -1172,6 +1173,7 @@
 				DECA88972CF9D2F300BA5090 /* OFocusZoneButton.swift */,
 				DECA88982CF9D2F300BA5090 /* OGenderButton.swift */,
 				DECA88992CF9D2F300BA5090 /* OSkillLevelScoreView.swift */,
+				DE8820D22CFDD4280050F07F /* OFitnessGroupButton.swift */,
 			);
 			path = Atoms;
 			sourceTree = "<group>";
@@ -1189,6 +1191,7 @@
 				DECA88A12CF9D2F300BA5090 /* OSkillLevelView.swift */,
 				DECA88A22CF9D2F300BA5090 /* OSlideView.swift */,
 				DECA88A32CF9D2F300BA5090 /* OWelcomeView.swift */,
+				DE8820D02CFDCF060050F07F /* OFitnessGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1198,9 +1201,9 @@
 			children = (
 				DECA888F2CF9D2F300BA5090 /* Utils */,
 				DECA88A42CF9D2F300BA5090 /* Views */,
-				DECA88A52CF9D2F300BA5090 /* OnboardingView.swift */,
 				DECA88A62CF9D2F300BA5090 /* OnboardingViewController.swift */,
 				DECA88A72CF9D2F300BA5090 /* OnboardingViewModel.swift */,
+				DECA88A52CF9D2F300BA5090 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1371,9 +1374,9 @@
 			isa = PBXGroup;
 			children = (
 				DECA88DD2CF9D2F300BA5090 /* Utils */,
-				DECA88DE2CF9D2F300BA5090 /* SplashView.swift */,
 				DECA88DF2CF9D2F300BA5090 /* SplashViewController.swift */,
 				DECA88E02CF9D2F300BA5090 /* SplashViewModel.swift */,
+				DECA88DE2CF9D2F300BA5090 /* SplashView.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -1787,29 +1790,10 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DECA89592CF9D2F300BA5090 /* GetPaygate */ = {
-			isa = PBXGroup;
-			children = (
-				DECA89572CF9D2F300BA5090 /* GetPaygateRequest.swift */,
-				DECA89582CF9D2F300BA5090 /* GetPaygateResponse.swift */,
-			);
-			path = GetPaygate;
-			sourceTree = "<group>";
-		};
-		DECA895A2CF9D2F300BA5090 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				DECA89592CF9D2F300BA5090 /* GetPaygate */,
-			);
-			path = Request;
-			sourceTree = "<group>";
-		};
 		DECA895C2CF9D2F300BA5090 /* Paygate */ = {
 			isa = PBXGroup;
 			children = (
 				DECA89562CF9D2F300BA5090 /* Model */,
-				DECA895A2CF9D2F300BA5090 /* Request */,
-				DECA895B2CF9D2F300BA5090 /* PaygateManager.swift */,
 			);
 			path = Paygate;
 			sourceTree = "<group>";
@@ -2460,6 +2444,7 @@
 				DECA8A702CF9D2F300BA5090 /* WTFocusZonesCollectionCell.swift in Sources */,
 				DECA8A712CF9D2F300BA5090 /* ProfileMediator.swift in Sources */,
 				DECA8A722CF9D2F300BA5090 /* NavigationController.swift in Sources */,
+				DE8820D32CFDD4280050F07F /* OFitnessGroupButton.swift in Sources */,
 				DECA8A732CF9D2F300BA5090 /* PaygateViewControllerDelegate.swift in Sources */,
 				DECA8A742CF9D2F300BA5090 /* GetProfileRequest.swift in Sources */,
 				DECA8A752CF9D2F300BA5090 /* Appearance.swift in Sources */,
@@ -2476,7 +2461,6 @@
 				DECA8A802CF9D2F300BA5090 /* SessionManager.swift in Sources */,
 				DECA8A812CF9D2F300BA5090 /* DrillTrainingResultViewModel.swift in Sources */,
 				DECA8A822CF9D2F300BA5090 /* WorkoutTrainingLifeCyrcle.swift in Sources */,
-				DECA8A832CF9D2F300BA5090 /* GetPaygateResponse.swift in Sources */,
 				DECA8A842CF9D2F300BA5090 /* ExerciseInstructionViewModel.swift in Sources */,
 				DECA8A852CF9D2F300BA5090 /* HomeNoTrainingsCell.swift in Sources */,
 				DECA8A862CF9D2F300BA5090 /* GetWorkoutTemplateResponse.swift in Sources */,
@@ -2513,7 +2497,6 @@
 				DECA8AA52CF9D2F300BA5090 /* OPreloaderView.swift in Sources */,
 				DECA8AA62CF9D2F300BA5090 /* PaygateInteractor.swift in Sources */,
 				DECA8AA72CF9D2F300BA5090 /* ImagePicker.swift in Sources */,
-				DECA8AA82CF9D2F300BA5090 /* PaygateManager.swift in Sources */,
 				DECA8AA92CF9D2F300BA5090 /* HomeDrillCategoriesCollectionView.swift in Sources */,
 				DECA8AAA2CF9D2F300BA5090 /* WorkoutTrainingAssembly.swift in Sources */,
 				DECA8AAB2CF9D2F300BA5090 /* PaygateOptionConfig.swift in Sources */,
@@ -2545,7 +2528,6 @@
 				DECA8AC52CF9D2F300BA5090 /* GlobalDefinitions.swift in Sources */,
 				DECA8AC62CF9D2F300BA5090 /* HomeWorkoutsCell.swift in Sources */,
 				DECA8AC72CF9D2F300BA5090 /* WorkoutTrainingViewModel.swift in Sources */,
-				DECA8AC82CF9D2F300BA5090 /* GetPaygateRequest.swift in Sources */,
 				DECA8AC92CF9D2F300BA5090 /* GetWorkoutStepsResponse.swift in Sources */,
 				DECA8ACA2CF9D2F300BA5090 /* DailyPicksTableCell.swift in Sources */,
 				DECA8ACB2CF9D2F300BA5090 /* DTIButtonsCell.swift in Sources */,
@@ -2560,12 +2542,14 @@
 				DECA8AD42CF9D2F300BA5090 /* ExerciseInstructionImageCell.swift in Sources */,
 				DECA8AD52CF9D2F300BA5090 /* WorkoutTraining.swift in Sources */,
 				DECA8AD62CF9D2F300BA5090 /* HomeTableElement.swift in Sources */,
+				DE8820D12CFDCF060050F07F /* OFitnessGroupView.swift in Sources */,
 				DECA8AD72CF9D2F300BA5090 /* WorkoutTemplateViewModel.swift in Sources */,
 				DECA8AD82CF9D2F300BA5090 /* ReinitPlanRequest.swift in Sources */,
 				DECA8AD92CF9D2F300BA5090 /* ProfileMainProgressView.swift in Sources */,
 				DECA8ADA2CF9D2F300BA5090 /* DrillTrainingQuitViewController.swift in Sources */,
 				DECA8ADB2CF9D2F300BA5090 /* WorkoutTrainingQuitView.swift in Sources */,
 				DECA8ADC2CF9D2F300BA5090 /* IAPError.swift in Sources */,
+				DE8820CE2CFDBB9E0050F07F /* FitnessGroup.swift in Sources */,
 				DECA8ADD2CF9D2F300BA5090 /* TapAreaButton.swift in Sources */,
 				DECA8ADE2CF9D2F300BA5090 /* ProfileEditGoalsView.swift in Sources */,
 				DECA8ADF2CF9D2F300BA5090 /* ODayOfWeekButton.swift in Sources */,

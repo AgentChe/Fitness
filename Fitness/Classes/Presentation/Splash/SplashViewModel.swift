@@ -26,7 +26,6 @@ final class SplashViewModel {
     private lazy var contentManager = ContentManager()
     private lazy var workoutManager = WorkoutManager()
     private lazy var drillManager = DrillManager()
-    private lazy var paygateManager = PaygateManager()
     
     private lazy var observableRetrySingle = ObservableRetrySingle()
 }
@@ -68,13 +67,29 @@ private extension SplashViewModel {
                 
                 if let cachedToken = self.sessionManager.getSession()?.userToken {
                     if cachedToken != otterScaleID {
-                        complete = self.profileManager.syncTokens(oldToken: cachedToken,
-                                                                  newToken: otterScaleID)
+                        let requests = FitnessGroup.allCases
+                            .map { group -> Single<Void> in
+                                self.profileManager
+                                    .syncTokens(
+                                        group: group,
+                                        oldToken: cachedToken,
+                                        newToken: otterScaleID
+                                    )
+                            }
+                        complete = Single.zip(requests).mapToVoid()
                     } else {
                         complete = .deferred { .just(Void()) }
                     }
                 } else {
-                    complete = self.profileManager.login(userToken: otterScaleID)
+                    let requests = FitnessGroup.allCases
+                        .map { group -> Single<Void> in
+                            self.profileManager
+                                .login(
+                                    group: group,
+                                    userToken: otterScaleID
+                                )
+                        }
+                    complete = Single<Void>.zip(requests).mapToVoid()
                 }
                 
                 return complete
@@ -121,9 +136,6 @@ private extension SplashViewModel {
             let workoutCovers = workoutManager
                 .obtainWorkoutCovers(forceUpdate: true)
                 .mapToVoid()
-            let paygate = paygateManager
-                .obtainPaygate(forceUpdate: true)
-                .mapToVoid()
             
             return Single
                 .zip([
@@ -132,8 +144,7 @@ private extension SplashViewModel {
                     levels,
                     focusZones,
                     workoutSteps,
-                    workoutCovers,
-                    paygate
+                    workoutCovers
                 ])
                 .mapToVoid()
         }

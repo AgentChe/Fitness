@@ -20,57 +20,30 @@ final class PaygateViewModel {
     
     private lazy var iapManager = IAPManager()
     private lazy var purchaseInteractor = PaygateInteractor()
-    private lazy var paygateManager = PaygateManager()
 }
 
 // MARK: Private
 private extension PaygateViewModel {
     func makeProducts() -> Driver<[PaygateOptionInfo]> {
-        makeProductIds()
-            .flatMap { [weak self] args -> Driver<[PaygateOptionInfo]> in
-                guard let self = self else {
-                    return .never()
+        let ids = [
+            GlobalDefinitions.Paygate.defaultLifetime,
+            GlobalDefinitions.Paygate.defaultMonthly
+        ]
+        
+        return iapManager
+            .obtainPrices(for: ids)
+            .map { [weak self] prices -> [PaygateOptionInfo] in
+                guard let self, let paygate = Paygate(prices: prices) else {
+                    return []
                 }
                 
-                let (paygate, productIds) = args
-                
-                return  self.iapManager
-                    .obtainPrices(for: productIds)
-                    .map { prices -> [PaygateOptionInfo] in
-                        guard let paygate = paygate ?? Paygate(prices: prices) else {
-                            return []
-                        }
-                        
-                        return [
-                            self.info(config: paygate.leftOptionConfig, prices: prices),
-                            self.info(config: paygate.rightOptionConfig, prices: prices)
-                        ].compactMap { $0 }
-                    }
-                    .trackActivity(self.activityIndicator)
-                    .asDriver(onErrorJustReturn: [])
+                return [
+                    info(config: paygate.leftOptionConfig, prices: prices),
+                    info(config: paygate.rightOptionConfig, prices: prices)
+                ].compactMap { $0 }
             }
-    }
-    
-    func makeProductIds() -> Driver<(Paygate?, [String])> {
-        paygateManager
-            .obtainPaygate(forceUpdate: false)
-            .asDriver(onErrorJustReturn: nil)
-            .map { paygate -> (Paygate?, [String]) in
-                var productIds = [
-                    GlobalDefinitions.Paygate.defaultLifetime,
-                    GlobalDefinitions.Paygate.defaultMonthly
-                ]
-                
-                if let paygate = paygate {
-                    productIds = [
-                        paygate.leftOptionConfig.productId,
-                        paygate.rightOptionConfig.productId
-                    ]
-                }
-                
-                return (paygate, productIds)
-            }
-            .asDriver(onErrorDriveWith: .never())
+            .trackActivity(activityIndicator)
+            .asDriver(onErrorJustReturn: [])
     }
     
     func makeBuyed() -> Signal<Bool> {

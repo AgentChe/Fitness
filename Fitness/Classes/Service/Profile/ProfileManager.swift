@@ -14,8 +14,8 @@ protocol ProfileManagerProtocol {
              focusZonesIds: [Int]?,
              gender: Gender?) -> Single<Void>
     func obtainProfile(forceUpdate: Bool) -> Single<Profile?>
-    func syncTokens(oldToken: String, newToken: String) -> Single<Void>
-    func login(userToken: String) -> Single<Void>
+    func syncTokens(group: FitnessGroup, oldToken: String, newToken: String) -> Single<Void>
+    func login(group: FitnessGroup, userToken: String) -> Single<Void>
 }
 
 final class ProfileManager {
@@ -83,17 +83,25 @@ extension ProfileManager: ProfileManagerProtocol {
         forceUpdate ? loadProfile() : cachedProfile()
     }
     
-    func syncTokens(oldToken: String, newToken: String) -> Single<Void> {
-        let request = SyncTokensRequest(oldToken: oldToken,
-                                        newToken: newToken)
+    func syncTokens(group: FitnessGroup, oldToken: String, newToken: String) -> Single<Void> {
+        let request = SyncTokensRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            oldToken: oldToken,
+            newToken: newToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
     }
     
-    func login(userToken: String) -> Single<Void> {
-        let request = LoginRequest(userToken: userToken)
+    func login(group: FitnessGroup, userToken: String) -> Single<Void> {
+        let request = LoginRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)

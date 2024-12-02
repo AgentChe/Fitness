@@ -9,11 +9,12 @@ import UIKit
 
 final class OnboardingView: UIView {
     enum Step: Int {
-        case welcome, gender, age, skillLevel, daysOfWeek, drills, focusZone, preloader
+        case welcome, fitnessGroup, gender, age, skillLevel, daysOfWeek, drills, focusZone, preloader
     }
     
     var didFinish: (() -> Void)?
     
+    private lazy var fitnessGroupView = OFitnessGroupView(step: .fitnessGroup)
     private lazy var genderView = OGenderView(step: .gender)
     private lazy var skillLevelView = OSkillLevelView(step: .skillLevel)
     private lazy var daysOfWeekView = ODaysOfWeekView(step: .daysOfWeek)
@@ -24,6 +25,7 @@ final class OnboardingView: UIView {
     private lazy var contentViews: [OSlideView] = {
         [
             OWelcomeView(step: .welcome),
+            fitnessGroupView,
             genderView,
             OAgeView(step: .age),
             skillLevelView,
@@ -98,6 +100,7 @@ private extension OnboardingView {
                 }
             }
         
+        fitnessGroupView.vc = vc 
         genderView.add(delegate: focusZoneView)
         genderView.add(delegate: combineData)
         skillLevelView.mainDelegate = combineData

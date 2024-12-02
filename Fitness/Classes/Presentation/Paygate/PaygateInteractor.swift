@@ -81,12 +81,29 @@ extension PaygateInteractor: OtterScaleReceiptValidationDelegate {
         
         if let cachedToken = self.sessionManager.getSession()?.userToken {
             if cachedToken != otterScaleID {
-                complete = self.profileManager.syncTokens(oldToken: cachedToken, newToken: otterScaleID)
+                let requests = FitnessGroup.allCases
+                    .map { group -> Single<Void> in
+                        self.profileManager
+                            .syncTokens(
+                                group: group,
+                                oldToken: cachedToken,
+                                newToken: otterScaleID
+                            )
+                    }
+                complete = Single.zip(requests).mapToVoid()
             } else {
                 complete = .deferred { .just(Void()) }
             }
         } else {
-            complete = self.profileManager.login(userToken: otterScaleID)
+            let requests = FitnessGroup.allCases
+                .map { group -> Single<Void> in
+                    self.profileManager
+                        .login(
+                            group: group,
+                            userToken: otterScaleID
+                        )
+                }
+            complete = Single<Void>.zip(requests).mapToVoid()
         }
         
         let disposable = complete.subscribe(onSuccess: { [weak self] in
