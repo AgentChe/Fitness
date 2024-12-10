@@ -11,6 +11,14 @@
 		DE8820CE2CFDBB9E0050F07F /* FitnessGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820CD2CFDBB9E0050F07F /* FitnessGroup.swift */; };
 		DE8820D12CFDCF060050F07F /* OFitnessGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D02CFDCF060050F07F /* OFitnessGroupView.swift */; };
 		DE8820D32CFDD4280050F07F /* OFitnessGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D22CFDD4280050F07F /* OFitnessGroupButton.swift */; };
+		DE8820D62CFDF7FF0050F07F /* ChangeFitnessGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D52CFDF7FF0050F07F /* ChangeFitnessGroupViewController.swift */; };
+		DE8820D82CFDF8040050F07F /* ChangeFitnessGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D72CFDF8040050F07F /* ChangeFitnessGroupViewModel.swift */; };
+		DE8820DA2CFDF8080050F07F /* ChangeFitnessGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820D92CFDF8080050F07F /* ChangeFitnessGroupView.swift */; };
+		DE8820DD2CFDF95F0050F07F /* CFGFitnesGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820DC2CFDF95F0050F07F /* CFGFitnesGroupView.swift */; };
+		DE8820DF2CFDF9840050F07F /* CFGDaysOfWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820DE2CFDF9840050F07F /* CFGDaysOfWeekView.swift */; };
+		DE8820E12CFDF98F0050F07F /* CFGFocusZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820E02CFDF98F0050F07F /* CFGFocusZoneView.swift */; };
+		DE8820E32CFDF99F0050F07F /* CFGGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820E22CFDF99F0050F07F /* CFGGoalsView.swift */; };
+		DE8820E52CFDF9AD0050F07F /* CFGSkillLevelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8820E42CFDF9AD0050F07F /* CFGSkillLevelView.swift */; };
 		DECA87F42CF9D17600BA5090 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DECA87EF2CF9D17600BA5090 /* Assets.xcassets */; };
 		DECA87F62CF9D17600BA5090 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DECA87F22CF9D17600BA5090 /* LaunchScreen.storyboard */; };
 		DECA89AF2CF9D2F300BA5090 /* LogDrillProgressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA894A2CF9D2F300BA5090 /* LogDrillProgressResponse.swift */; };
@@ -335,6 +343,14 @@
 		DE8820CD2CFDBB9E0050F07F /* FitnessGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessGroup.swift; sourceTree = "<group>"; };
 		DE8820D02CFDCF060050F07F /* OFitnessGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFitnessGroupView.swift; sourceTree = "<group>"; };
 		DE8820D22CFDD4280050F07F /* OFitnessGroupButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OFitnessGroupButton.swift; sourceTree = "<group>"; };
+		DE8820D52CFDF7FF0050F07F /* ChangeFitnessGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFitnessGroupViewController.swift; sourceTree = "<group>"; };
+		DE8820D72CFDF8040050F07F /* ChangeFitnessGroupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFitnessGroupViewModel.swift; sourceTree = "<group>"; };
+		DE8820D92CFDF8080050F07F /* ChangeFitnessGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeFitnessGroupView.swift; sourceTree = "<group>"; };
+		DE8820DC2CFDF95F0050F07F /* CFGFitnesGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFGFitnesGroupView.swift; sourceTree = "<group>"; };
+		DE8820DE2CFDF9840050F07F /* CFGDaysOfWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFGDaysOfWeekView.swift; sourceTree = "<group>"; };
+		DE8820E02CFDF98F0050F07F /* CFGFocusZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFGFocusZoneView.swift; sourceTree = "<group>"; };
+		DE8820E22CFDF99F0050F07F /* CFGGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFGGoalsView.swift; sourceTree = "<group>"; };
+		DE8820E42CFDF9AD0050F07F /* CFGSkillLevelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFGSkillLevelView.swift; sourceTree = "<group>"; };
 		DECA87D72CF9D14100BA5090 /* Fitness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fitness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DECA87EF2CF9D17600BA5090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DECA87F02CF9D17600BA5090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -672,6 +688,29 @@
 				A6872A514EEE7740F6E290DE /* Pods_Fitness.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE8820D42CFDF7ED0050F07F /* ChangeFitnessGroup */ = {
+			isa = PBXGroup;
+			children = (
+				DE8820DB2CFDF83F0050F07F /* Views */,
+				DE8820D52CFDF7FF0050F07F /* ChangeFitnessGroupViewController.swift */,
+				DE8820D72CFDF8040050F07F /* ChangeFitnessGroupViewModel.swift */,
+				DE8820D92CFDF8080050F07F /* ChangeFitnessGroupView.swift */,
+			);
+			path = ChangeFitnessGroup;
+			sourceTree = "<group>";
+		};
+		DE8820DB2CFDF83F0050F07F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE8820DC2CFDF95F0050F07F /* CFGFitnesGroupView.swift */,
+				DE8820E42CFDF9AD0050F07F /* CFGSkillLevelView.swift */,
+				DE8820DE2CFDF9840050F07F /* CFGDaysOfWeekView.swift */,
+				DE8820E22CFDF99F0050F07F /* CFGGoalsView.swift */,
+				DE8820E02CFDF98F0050F07F /* CFGFocusZoneView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		DECA87CE2CF9D14100BA5090 = {
@@ -1271,9 +1310,9 @@
 			isa = PBXGroup;
 			children = (
 				DECA88BB2CF9D2F300BA5090 /* Views */,
-				DECA88BC2CF9D2F300BA5090 /* ProfileDetailsView.swift */,
 				DECA88BD2CF9D2F300BA5090 /* ProfileDetailsViewController.swift */,
 				DECA88BE2CF9D2F300BA5090 /* ProfileDetailsViewModel.swift */,
+				DECA88BC2CF9D2F300BA5090 /* ProfileDetailsView.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -1293,9 +1332,9 @@
 			isa = PBXGroup;
 			children = (
 				DECA88C42CF9D2F300BA5090 /* Views */,
-				DECA88C52CF9D2F300BA5090 /* ProfileEditView.swift */,
 				DECA88C62CF9D2F300BA5090 /* ProfileEditViewController.swift */,
 				DECA88C72CF9D2F300BA5090 /* ProfileEditViewModel.swift */,
+				DECA88C52CF9D2F300BA5090 /* ProfileEditView.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -1344,9 +1383,9 @@
 			isa = PBXGroup;
 			children = (
 				DECA88D52CF9D2F300BA5090 /* View */,
-				DECA88D62CF9D2F300BA5090 /* ProfileMainView.swift */,
 				DECA88D72CF9D2F300BA5090 /* ProfileMainViewController.swift */,
 				DECA88D82CF9D2F300BA5090 /* ProfileMainViewModel.swift */,
+				DECA88D62CF9D2F300BA5090 /* ProfileMainView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1354,6 +1393,7 @@
 		DECA88DA2CF9D2F300BA5090 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DE8820D42CFDF7ED0050F07F /* ChangeFitnessGroup */,
 				DECA88BF2CF9D2F300BA5090 /* Details */,
 				DECA88C82CF9D2F300BA5090 /* Edit */,
 				DECA88D92CF9D2F300BA5090 /* Main */,
@@ -2350,6 +2390,7 @@
 				DECA8A122CF9D2F300BA5090 /* ProfileDetailsTableView.swift in Sources */,
 				DECA8A132CF9D2F300BA5090 /* ExerciseInstructionNameCell.swift in Sources */,
 				DECA8A142CF9D2F300BA5090 /* OGenderButton.swift in Sources */,
+				DE8820E32CFDF99F0050F07F /* CFGGoalsView.swift in Sources */,
 				DECA8A152CF9D2F300BA5090 /* GetWorkoutStepsRequest.swift in Sources */,
 				DECA8A162CF9D2F300BA5090 /* PlanManager.swift in Sources */,
 				DECA8A172CF9D2F300BA5090 /* WorkoutTrainingResultViewController.swift in Sources */,
@@ -2387,6 +2428,7 @@
 				DECA8A372CF9D2F300BA5090 /* ProgressProfileCell.swift in Sources */,
 				DECA8A382CF9D2F300BA5090 /* TextAttributes.swift in Sources */,
 				DECA8A392CF9D2F300BA5090 /* DTITableElement.swift in Sources */,
+				DE8820DF2CFDF9840050F07F /* CFGDaysOfWeekView.swift in Sources */,
 				DECA8A3A2CF9D2F300BA5090 /* DailyPicksCollectionView.swift in Sources */,
 				DECA8A3B2CF9D2F300BA5090 /* CalendarDateCell.swift in Sources */,
 				DECA8A3C2CF9D2F300BA5090 /* WorkoutManager.swift in Sources */,
@@ -2441,14 +2483,17 @@
 				DECA8A6D2CF9D2F300BA5090 /* ContentError.swift in Sources */,
 				DECA8A6E2CF9D2F300BA5090 /* WorkoutTemplateView.swift in Sources */,
 				DECA8A6F2CF9D2F300BA5090 /* ProfileCalendarView.swift in Sources */,
+				DE8820E12CFDF98F0050F07F /* CFGFocusZoneView.swift in Sources */,
 				DECA8A702CF9D2F300BA5090 /* WTFocusZonesCollectionCell.swift in Sources */,
 				DECA8A712CF9D2F300BA5090 /* ProfileMediator.swift in Sources */,
+				DE8820D82CFDF8040050F07F /* ChangeFitnessGroupViewModel.swift in Sources */,
 				DECA8A722CF9D2F300BA5090 /* NavigationController.swift in Sources */,
 				DE8820D32CFDD4280050F07F /* OFitnessGroupButton.swift in Sources */,
 				DECA8A732CF9D2F300BA5090 /* PaygateViewControllerDelegate.swift in Sources */,
 				DECA8A742CF9D2F300BA5090 /* GetProfileRequest.swift in Sources */,
 				DECA8A752CF9D2F300BA5090 /* Appearance.swift in Sources */,
 				DECA8A762CF9D2F300BA5090 /* DrillTrainingResultView.swift in Sources */,
+				DE8820DD2CFDF95F0050F07F /* CFGFitnesGroupView.swift in Sources */,
 				DECA8A772CF9D2F300BA5090 /* WorkoutTrainingQuitViewController.swift in Sources */,
 				DECA8A782CF9D2F300BA5090 /* UIViewRxExtension.swift in Sources */,
 				DECA8A792CF9D2F300BA5090 /* PaygateProductButton.swift in Sources */,
@@ -2493,6 +2538,7 @@
 				DECA8AA12CF9D2F300BA5090 /* CalendarViewModel.swift in Sources */,
 				DECA8AA22CF9D2F300BA5090 /* DailyTrainingInstructionView.swift in Sources */,
 				DECA8AA32CF9D2F300BA5090 /* Session.swift in Sources */,
+				DE8820D62CFDF7FF0050F07F /* ChangeFitnessGroupViewController.swift in Sources */,
 				DECA8AA42CF9D2F300BA5090 /* CircleProgressView.swift in Sources */,
 				DECA8AA52CF9D2F300BA5090 /* OPreloaderView.swift in Sources */,
 				DECA8AA62CF9D2F300BA5090 /* PaygateInteractor.swift in Sources */,
@@ -2507,6 +2553,7 @@
 				DECA8AB02CF9D2F300BA5090 /* WorkoutStep.swift in Sources */,
 				DECA8AB12CF9D2F300BA5090 /* ProfileMainView.swift in Sources */,
 				DECA8AB22CF9D2F300BA5090 /* ProfileMainViewModel.swift in Sources */,
+				DE8820DA2CFDF8080050F07F /* ChangeFitnessGroupView.swift in Sources */,
 				DECA8AB32CF9D2F300BA5090 /* WorkoutTrainingViewController.swift in Sources */,
 				DECA8AB42CF9D2F300BA5090 /* String+Extension.swift in Sources */,
 				DECA8AB52CF9D2F300BA5090 /* DrillMediator.swift in Sources */,
@@ -2549,6 +2596,7 @@
 				DECA8ADA2CF9D2F300BA5090 /* DrillTrainingQuitViewController.swift in Sources */,
 				DECA8ADB2CF9D2F300BA5090 /* WorkoutTrainingQuitView.swift in Sources */,
 				DECA8ADC2CF9D2F300BA5090 /* IAPError.swift in Sources */,
+				DE8820E52CFDF9AD0050F07F /* CFGSkillLevelView.swift in Sources */,
 				DE8820CE2CFDBB9E0050F07F /* FitnessGroup.swift in Sources */,
 				DECA8ADD2CF9D2F300BA5090 /* TapAreaButton.swift in Sources */,
 				DECA8ADE2CF9D2F300BA5090 /* ProfileEditGoalsView.swift in Sources */,

@@ -8,10 +8,12 @@
 import Alamofire
 
 struct GetDrillCategoriesRequest: APIRequestBody {
+    let domain: String
+    let apiKey: String
     let userToken: String
 
     var url: String {
-        GlobalDefinitions.domain + "/api/glossary/drill_categories"
+        domain + "/api/glossary/drill_categories"
     }
     
     var method: HTTPMethod {
@@ -20,7 +22,7 @@ struct GetDrillCategoriesRequest: APIRequestBody {
     
     var parameters: Parameters? {
         [
-            "_api_key": GlobalDefinitions.apiKey,
+            "_api_key": apiKey,
             "_user_token": userToken
         ]
     }

@@ -40,6 +40,9 @@ final class ProfileDetailsViewController: UIViewController {
 private extension ProfileDetailsViewController {
     func route(_ route: ProfileDetailsViewModel.Route) {
         switch route {
+        case .fitnessGroup(let fitnessGroup):
+            let vc = ChangeFitnessGroupViewController.make(fitnessGroup: fitnessGroup)
+            present(vc, animated: true)
         case .skillLevel(let level):
             let vc = ProfileEditViewController.make(skillLevel: level)
             vc.modalPresentationStyle = .fullScreen

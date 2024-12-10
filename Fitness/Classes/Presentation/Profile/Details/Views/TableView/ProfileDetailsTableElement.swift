@@ -12,6 +12,7 @@ enum ProfileDetailsTableElement {
     case header(String)
     
     enum CellType {
+        case fitnessGroup
         case skillLevel
         case trainingDays
         case focusZone

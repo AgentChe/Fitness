@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol DrillManagerProtocol {
-    func obtainDrillCategories(forceUpdate: Bool) -> Single<[DrillCategory]>
+    func obtainDrillCategories(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<[DrillCategory]>
     func obtainDrills(categoryId: Int?, levelId: Int?) -> Single<[Drill]>
     func assignDrill(id: Int) -> Single<AssignedDrill?>
     func scheduleDrill(customerDrillId: Int, scheduleDate: TimeInterval) -> Single<AssignedDrill?>
@@ -28,8 +28,8 @@ final class DrillManager {
 
 // MARK: DrillManagerProtocol
 extension DrillManager: DrillManagerProtocol {
-    func obtainDrillCategories(forceUpdate: Bool) -> Single<[DrillCategory]> {
-        forceUpdate ? loadDrillCategories() : cachedDrillCategories()
+    func obtainDrillCategories(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[DrillCategory]> {
+        forceUpdate ? loadDrillCategories(group: group, save: save) : cachedDrillCategories()
     }
     
     func obtainDrills(categoryId: Int?, levelId: Int?) -> Single<[Drill]> {
@@ -135,18 +135,22 @@ extension DrillManager: DrillManagerProtocol {
 
 // MARK: Private
 private extension DrillManager {
-    func loadDrillCategories() -> Single<[DrillCategory]> {
+    func loadDrillCategories(group: FitnessGroup, save: Bool) -> Single<[DrillCategory]> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetDrillCategoriesRequest(userToken: userToken)
+        let request = GetDrillCategoriesRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetDrillCategoriesResponse.map(from: $0) }
             .do(onSuccess: { drills in
-                guard let data = try? JSONEncoder().encode(drills) else {
+                guard save, let data = try? JSONEncoder().encode(drills) else {
                     return
                 }
                 

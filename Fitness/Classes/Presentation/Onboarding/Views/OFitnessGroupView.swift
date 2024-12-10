@@ -81,7 +81,7 @@ private extension OFitnessGroupView {
                 } else {
                     FitnessGroup.current = group
                     
-                    return library()
+                    return library(group: group)
                         .asDriver(onErrorJustReturn: ())
                         .do(onNext: {
                             FitnessGroupMediator.shared.updateAfterSetProfile()
@@ -95,22 +95,22 @@ private extension OFitnessGroupView {
             .disposed(by: disposeBag)
     }
     
-    func library() -> Observable<Void> {
+    func library(group: FitnessGroup) -> Observable<Void> {
         func source() -> Single<Void> {
             let drillCategories = drillManager
-                .obtainDrillCategories(forceUpdate: true)
+                .obtainDrillCategories(group: group, forceUpdate: true)
                 .mapToVoid()
             let levels = contentManager
-                .obtainLevels(forceUpdate: true)
+                .obtainLevels(group: group, forceUpdate: true)
                 .mapToVoid()
             let focusZones = workoutManager
-                .obtainFocusZones(forceUpdate: true)
+                .obtainFocusZones(group: group, forceUpdate: true)
                 .mapToVoid()
             let workoutSteps = workoutManager
-                .obtainWorkoutSteps(forceUpdate: true)
+                .obtainWorkoutSteps(group: group, forceUpdate: true)
                 .mapToVoid()
             let workoutCovers = workoutManager
-                .obtainWorkoutCovers(forceUpdate: true)
+                .obtainWorkoutCovers(group: group, forceUpdate: true)
                 .mapToVoid()
             
             return Single

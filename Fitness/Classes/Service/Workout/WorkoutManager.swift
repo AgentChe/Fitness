@@ -8,9 +8,9 @@
 import RxSwift
 
 protocol WorkoutManagerProtocol {
-    func obtainFocusZones(forceUpdate: Bool) -> Single<[FocusZone]>
-    func obtainWorkoutSteps(forceUpdate: Bool) -> Single<[WorkoutStep]>
-    func obtainWorkoutCovers(forceUpdate: Bool) -> Single<[WorkoutCover]>
+    func obtainFocusZones(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<[FocusZone]>
+    func obtainWorkoutSteps(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<[WorkoutStep]>
+    func obtainWorkoutCovers(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<[WorkoutCover]>
     func obtainWorkoutTemplate(coverId: Int, levelId: Int) -> Single<WorkoutTemplate?>
     func obtainWorkoutTemplate(focusZoneId: Int, levelId: Int) -> Single<WorkoutTemplate?>
     func obtainWorkoutTemplate(stepId: Int, levelId: Int) -> Single<WorkoutTemplate?>
@@ -34,16 +34,16 @@ final class WorkoutManager {
 
 // MARK: WorkoutManagerProtocol
 extension WorkoutManager: WorkoutManagerProtocol {
-    func obtainFocusZones(forceUpdate: Bool) -> Single<[FocusZone]> {
-        forceUpdate ? loadFocusZones() : cachedFocusZones()
+    func obtainFocusZones(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[FocusZone]> {
+        forceUpdate ? loadFocusZones(group: group, save: save) : cachedFocusZones()
     }
     
-    func obtainWorkoutSteps(forceUpdate: Bool) -> Single<[WorkoutStep]> {
-        forceUpdate ? loadWorkoutSteps() : cachedWorkoutSteps()
+    func obtainWorkoutSteps(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[WorkoutStep]> {
+        forceUpdate ? loadWorkoutSteps(group: group, save: save) : cachedWorkoutSteps()
     }
     
-    func obtainWorkoutCovers(forceUpdate: Bool) -> Single<[WorkoutCover]> {
-        forceUpdate ? loadWorkoutCovers() : cachedWorkoutCovers()
+    func obtainWorkoutCovers(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[WorkoutCover]> {
+        forceUpdate ? loadWorkoutCovers(group: group, save: save) : cachedWorkoutCovers()
     }
     
     func obtainWorkoutTemplate(coverId: Int, levelId: Int) -> Single<WorkoutTemplate?> {
@@ -188,18 +188,22 @@ extension WorkoutManager: WorkoutManagerProtocol {
 
 // MARK: Private
 private extension WorkoutManager {
-    func loadFocusZones() -> Single<[FocusZone]> {
+    func loadFocusZones(group: FitnessGroup, save: Bool) -> Single<[FocusZone]> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetFocusZonesRequest(userToken: userToken)
+        let request = GetFocusZonesRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetFocusZonesResponse.map(from: $0) }
             .do(onSuccess: { focusZones in
-                guard let data = try? JSONEncoder().encode(focusZones) else {
+                guard save, let data = try? JSONEncoder().encode(focusZones) else {
                     return
                 }
                 
@@ -222,18 +226,22 @@ private extension WorkoutManager {
         }
     }
     
-    func loadWorkoutSteps() -> Single<[WorkoutStep]> {
+    func loadWorkoutSteps(group: FitnessGroup, save: Bool) -> Single<[WorkoutStep]> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetWorkoutStepsRequest(userToken: userToken)
+        let request = GetWorkoutStepsRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetWorkoutStepsResponse.map(from: $0) }
             .do(onSuccess: { workoutSteps in
-                guard let data = try? JSONEncoder().encode(workoutSteps) else {
+                guard save, let data = try? JSONEncoder().encode(workoutSteps) else {
                     return
                 }
                 
@@ -256,18 +264,22 @@ private extension WorkoutManager {
         }
     }
     
-    func loadWorkoutCovers() -> Single<[WorkoutCover]> {
+    func loadWorkoutCovers(group: FitnessGroup, save: Bool) -> Single<[WorkoutCover]> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetWorkoutCoversRequest(userToken: userToken)
+        let request = GetWorkoutCoversRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetWorkoutCoversResponse.map(from: $0) }
             .do(onSuccess: { workoutCovers in
-                guard let data = try? JSONEncoder().encode(workoutCovers) else {
+                guard save, let data = try? JSONEncoder().encode(workoutCovers) else {
                     return
                 }
                 

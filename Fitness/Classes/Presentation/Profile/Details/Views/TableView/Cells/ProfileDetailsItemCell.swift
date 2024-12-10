@@ -120,6 +120,8 @@ private extension ProfileDetailsItemCell {
 private extension ProfileDetailsTableElement.CellType {
     var title: String {
         switch self {
+        case .fitnessGroup:
+            return "Profile.FitnessGroup".localized
         case .skillLevel:
             return "Profile.SkillLevel".localized
         case .trainingDays:

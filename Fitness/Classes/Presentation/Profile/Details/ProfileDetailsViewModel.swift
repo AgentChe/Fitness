@@ -11,6 +11,7 @@ import RxCocoa
 
 final class ProfileDetailsViewModel {
     enum Route {
+        case fitnessGroup(FitnessGroup)
         case skillLevel(SkillLevel?)
         case trainingDays(WeekSchedule?)
         case focusZone([FocusZone], Gender?)
@@ -39,6 +40,8 @@ private extension ProfileDetailsViewModel {
                 guard case let .item(cellType, _, _) = item else { return nil }
                 
                 switch cellType {
+                case .fitnessGroup:
+                    return .fitnessGroup(data.fitnessGroup)
                 case .skillLevel:
                     return .skillLevel(data.level)
                 case .trainingDays:
@@ -59,6 +62,12 @@ private extension ProfileDetailsViewModel {
     }
     
     func makeEditableData() -> Driver<EditableData> {
+        let fitnessGroup = FitnessGroupMediator.shared
+            .didUpdateAfterSetProfile
+            .map { FitnessGroup.current }
+            .startWith(FitnessGroup.current)
+            .asObservable()
+        
         let profile = profileManager.obtainProfile(forceUpdate: false)
             .compactMap { $0 }
             .asObservable()
@@ -118,8 +127,8 @@ private extension ProfileDetailsViewModel {
             }
         
         return Observable
-            .combineLatest(level, weekSchedule, focusZones, profile.map { $0.gender }, goals) {
-                EditableData(level: $0, weekSchedule: $1, zones: $2, gender: $3, goals: $4)
+            .combineLatest(fitnessGroup, level, weekSchedule, focusZones, profile.map { $0.gender }, goals) {
+                EditableData(fitnessGroup: $0, level: $1, weekSchedule: $2, zones: $3, gender: $4, goals: $5)
             }
             .asDriver(onErrorDriveWith: .never())
     }
@@ -132,6 +141,7 @@ private extension ProfileDetailsViewModel {
                 let goalsSubtitle = value.goals.map { $0.name }.joined(separator: ", ")
                 
                 return [
+                    .item(type: .fitnessGroup, subtitle: value.fitnessGroup.localizedTitle),
                     .item(type: .skillLevel, subtitle: value.level?.name),
                     .item(type: .trainingDays, subtitle: trainingDaysSubtitle),
                     .item(type: .focusZone, subtitle: focusZonesSubtitle),
@@ -148,6 +158,7 @@ private extension ProfileDetailsViewModel {
 
 private extension ProfileDetailsViewModel {
     struct EditableData {
+        let fitnessGroup: FitnessGroup
         let level: SkillLevel?
         let weekSchedule: WeekSchedule?
         let zones: [FocusZone]
@@ -169,5 +180,22 @@ private extension WeekSchedule {
         ]
         .compactMap { $0 }
         .joined(separator: ", ")
+    }
+}
+
+private extension FitnessGroup {
+    var localizedTitle: String {
+        switch self {
+        case .calisthenics:
+            return "Onboarding.FitnessGroup.Calisthenics".localized
+        case .chairYoga:
+            return "Onboarding.FitnessGroup.ChairYoga".localized
+        case .somatic:
+            return "Onboarding.FitnessGroup.Somatic".localized
+        case .stretching:
+            return "Onboarding.FitnessGroup.Stretching".localized
+        case .wallPilates:
+            return "Onboarding.FitnessGroup.WallPilates".localized
+        }
     }
 }

@@ -184,6 +184,7 @@
 "Profile.StatsDescription.Min" = "min of completed training";
 "Profile.StatsDescription.Hour" = "hour of completed training";
 "Profile.StatsDescription.Hours" = "hours of completed training";
+"Profile.FitnessGroup" = "Fitness Group";
 "Profile.SkillLevel" = "Skill level";
 "Profile.TrainingDays" = "Training days";
 "Profile.FocusZones" = "Focus zones";

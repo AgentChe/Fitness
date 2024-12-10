@@ -9,7 +9,7 @@ import RxSwift
 
 protocol ContentManagerProtocol {
     func obtainHomeKit() -> Single<HomeKit?>
-    func obtainLevels(forceUpdate: Bool) -> Single<[SkillLevel]>
+    func obtainLevels(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<[SkillLevel]>
 }
 
 final class ContentManager {
@@ -36,25 +36,29 @@ extension ContentManager: ContentManagerProtocol {
             .map { GetHomeKitResponse.map(from: $0) }
     }
     
-    func obtainLevels(forceUpdate: Bool) -> Single<[SkillLevel]> {
-        forceUpdate ? loadLevels() : cachedLevels()
+    func obtainLevels(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[SkillLevel]> {
+        forceUpdate ? loadLevels(group: group, save: save) : cachedLevels()
     }
 }
 
 // MARK: Private
 private extension ContentManager {
-    func loadLevels() -> Single<[SkillLevel]> {
+    func loadLevels(group: FitnessGroup, save: Bool) -> Single<[SkillLevel]> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetSkillLevelsRequest(userToken: userToken)
+        let request = GetSkillLevelsRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetSkillLevelsResponse.map(from: $0) }
             .do(onSuccess: { levels in
-                guard let data = try? JSONEncoder().encode(levels) else {
+                guard save, let data = try? JSONEncoder().encode(levels) else {
                     return
                 }
                 

@@ -7,15 +7,14 @@
 
 import Foundation
 
-// TODO
 final class GlobalDefinitions {
     static let domain = FitnessGroup.current.domain
     static let apiKey = FitnessGroup.current.apiKey
     
     static let otterScaleHost = "https://api.korrekted.com"
-    static let otterScaleApiKey = "AfQhRjznT7gyI96w"
+    static let otterScaleApiKey = "vdOg9Izc5iKZqRDB"
     
-    static let applicationTag = "YOGA_WORKOUT"
+    static let applicationTag = "FITNESS_WORKOUT"
     static let amplitudeApiKey = "d433d2c66723aeefd10c5b65f91c1fa3"
     
     static let termsOfServiceUrl = URL(string: "https://coffeestop-ou.com/terms.html")!
@@ -24,7 +23,7 @@ final class GlobalDefinitions {
     
     // TODO: продукты для этого приложения зашиты в приложения, сделать актуальными
     enum Paygate {
-        static let defaultLifetime = "train.pilates.endless"
-        static let defaultMonthly = "train.pilates.monthly"
+        static let defaultLifetime = "train.fitness.endless"
+        static let defaultMonthly = "train.fitness.monthly"
     }
 }

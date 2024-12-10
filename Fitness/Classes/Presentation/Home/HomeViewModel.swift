@@ -94,7 +94,8 @@ private extension HomeViewModel {
             DrillMediator.shared.didSchedule.map { _ in Void() },
             PlanMediator.shared.didReinit.map { _ in Void() },
             ProfileMediator.shared.skillLevelIdChange.map { _ in Void() },
-            ProfileMediator.shared.drillsIdsChange.map { _ in Void() }
+            ProfileMediator.shared.drillsIdsChange.map { _ in Void() },
+            FitnessGroupMediator.shared.didUpdateAfterSetProfile
         )
         
         return triggers
@@ -126,21 +127,42 @@ private extension HomeViewModel {
     }
     
     func makeSkillLevels() -> Driver<[SkillLevel]> {
-        contentManager
-            .obtainLevels(forceUpdate: false)
-            .asDriver(onErrorJustReturn: [])
+        FitnessGroupMediator.shared
+            .didUpdateAfterSetProfile
+            .startWith(())
+            .flatMapLatest { [weak self] void -> Driver<[SkillLevel]> in
+                guard let self else { return .never() }
+                
+                return contentManager
+                    .obtainLevels(forceUpdate: false)
+                    .asDriver(onErrorJustReturn: [])
+            }
     }
     
     func makeDrillCategories() -> Driver<[DrillCategory]> {
-        drillManager
-            .obtainDrillCategories(forceUpdate: false)
-            .asDriver(onErrorJustReturn: [])
+        FitnessGroupMediator.shared
+            .didUpdateAfterSetProfile
+            .startWith(())
+            .flatMapLatest { [weak self] void -> Driver<[DrillCategory]> in
+                guard let self else { return .never() }
+                
+                return drillManager
+                    .obtainDrillCategories(forceUpdate: false)
+                    .asDriver(onErrorJustReturn: [])
+            }
     }
     
     func makeWorkoutCovers() -> Driver<[WorkoutCover]> {
-        workoutManager
-            .obtainWorkoutCovers(forceUpdate: false)
-            .asDriver(onErrorJustReturn: [])
+        FitnessGroupMediator.shared
+            .didUpdateAfterSetProfile
+            .startWith(())
+            .flatMapLatest { [weak self] void -> Driver<[WorkoutCover]> in
+                guard let self else { return .never() }
+                
+                return workoutManager
+                    .obtainWorkoutCovers(forceUpdate: false)
+                    .asDriver(onErrorJustReturn: [])
+            }
     }
     
     func makePlanDay() -> Driver<Date> {

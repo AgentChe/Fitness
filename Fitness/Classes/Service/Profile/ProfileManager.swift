@@ -8,12 +8,15 @@
 import RxSwift
 
 protocol ProfileManagerProtocol {
-    func set(skillLevelId: Int?,
-             weekSchedule: WeekSchedule?,
-             drillsIds: [Int]?,
-             focusZonesIds: [Int]?,
-             gender: Gender?) -> Single<Void>
-    func obtainProfile(forceUpdate: Bool) -> Single<Profile?>
+    func set(
+        group: FitnessGroup,
+        skillLevelId: Int?,
+        weekSchedule: WeekSchedule?,
+        drillsIds: [Int]?,
+        focusZonesIds: [Int]?,
+        gender: Gender?
+    ) -> Single<Void>
+    func obtainProfile(group: FitnessGroup, forceUpdate: Bool, save: Bool) -> Single<Profile?>
     func syncTokens(group: FitnessGroup, oldToken: String, newToken: String) -> Single<Void>
     func login(group: FitnessGroup, userToken: String) -> Single<Void>
 }
@@ -34,11 +37,14 @@ final class ProfileManager {
 
 // MARK: ProfileManagerProtocol
 extension ProfileManager: ProfileManagerProtocol {
-    func set(skillLevelId: Int? = nil,
-             weekSchedule: WeekSchedule? = nil,
-             drillsIds: [Int]? = nil,
-             focusZonesIds: [Int]? = nil,
-             gender: Gender? = nil) -> Single<Void> {
+    func set(
+        group: FitnessGroup = FitnessGroup.current,
+        skillLevelId: Int? = nil,
+        weekSchedule: WeekSchedule? = nil,
+        drillsIds: [Int]? = nil,
+        focusZonesIds: [Int]? = nil,
+        gender: Gender? = nil
+    ) -> Single<Void> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
@@ -79,8 +85,8 @@ extension ProfileManager: ProfileManagerProtocol {
             })
     }
     
-    func obtainProfile(forceUpdate: Bool) -> Single<Profile?> {
-        forceUpdate ? loadProfile() : cachedProfile()
+    func obtainProfile(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<Profile?> {
+        forceUpdate ? loadProfile(group: group, save: save) : cachedProfile()
     }
     
     func syncTokens(group: FitnessGroup, oldToken: String, newToken: String) -> Single<Void> {
@@ -111,22 +117,28 @@ extension ProfileManager: ProfileManagerProtocol {
 
 // MARK: Private
 private extension ProfileManager {
-    func loadProfile() -> Single<Profile?> {
+    func loadProfile(group: FitnessGroup, save: Bool) -> Single<Profile?> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
         }
         
-        let request = GetProfileRequest(userToken: userToken)
+        let request = GetProfileRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
+            userToken: userToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetProfileResponse.map(from: $0) }
             .do(onSuccess: { [weak self] profile in
-                self?.store(skillLevelId: profile?.skillLevelId)
-                self?.store(weekSchedule: profile?.weekSchedule)
-                self?.store(drillsIds: profile?.drillsIds)
-                self?.store(focusZonesIds: profile?.focusZonesIds)
-                self?.store(gender: profile?.gender)
+                if save {
+                    self?.store(skillLevelId: profile?.skillLevelId)
+                    self?.store(weekSchedule: profile?.weekSchedule)
+                    self?.store(drillsIds: profile?.drillsIds)
+                    self?.store(focusZonesIds: profile?.focusZonesIds)
+                    self?.store(gender: profile?.gender)
+                }
             })
     }
     
