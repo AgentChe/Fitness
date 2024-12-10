@@ -21,7 +21,6 @@ final class GlobalDefinitions {
     static let privacyPolicyUrl = URL(string: "https://coffeestop-ou.com/policy.html")!
     static let contactUsUrl = URL(string: "https://coffeestop-ou.com/contacts.html")!
     
-    // TODO: продукты для этого приложения зашиты в приложения, сделать актуальными
     enum Paygate {
         static let defaultLifetime = "train.fitness.endless"
         static let defaultMonthly = "train.fitness.monthly"
