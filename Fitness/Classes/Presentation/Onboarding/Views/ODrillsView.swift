@@ -34,6 +34,19 @@ final class ODrillsView: OSlideView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func moveToThis() {
+        super.moveToThis()
+        
+        drillManager
+            .obtainDrillCategories(forceUpdate: false)
+            .asDriver(onErrorJustReturn: [])
+            .drive(Binder(tableView) { base, drillCategories in
+                let elements = drillCategories.map { ODrillsTableElement(drillCategory: $0) }
+                base.setup(elements: elements)
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: Private
@@ -44,15 +57,6 @@ private extension ODrillsView {
         tableView.didChangeSelected = { [weak self] in
             self?.checkEnabled()
         }
-        
-        drillManager
-            .obtainDrillCategories(forceUpdate: false)
-            .asDriver(onErrorJustReturn: [])
-            .drive(Binder(tableView) { base, drillCategories in
-                let elements = drillCategories.map { ODrillsTableElement(drillCategory: $0) }
-                base.setup(elements: elements)
-            })
-            .disposed(by: disposeBag)
     }
     
     func checkEnabled() {

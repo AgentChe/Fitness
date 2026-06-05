@@ -29,7 +29,7 @@ final class DrillManager {
 // MARK: DrillManagerProtocol
 extension DrillManager: DrillManagerProtocol {
     func obtainDrillCategories(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[DrillCategory]> {
-        forceUpdate ? loadDrillCategories(group: group, save: save) : cachedDrillCategories()
+        forceUpdate ? loadDrillCategories(group: group, save: save) : cachedDrillCategories(group: group)
     }
     
     func obtainDrills(categoryId: Int?, levelId: Int?) -> Single<[Drill]> {
@@ -153,24 +153,28 @@ private extension DrillManager {
                 guard save, let data = try? JSONEncoder().encode(drills) else {
                     return
                 }
-                
-                UserDefaults.standard.set(data, forKey: Constants.drillCategoriesKey)
+
+                UserDefaults.standard.set(data, forKey: Self.key(group: group))
             })
     }
-    
-    func cachedDrillCategories() -> Single<[DrillCategory]> {
+
+    func cachedDrillCategories(group: FitnessGroup) -> Single<[DrillCategory]> {
         Single<[DrillCategory]>
             .create { event in
-                guard let data = UserDefaults.standard.data(forKey: Constants.drillCategoriesKey) else {
+                guard let data = UserDefaults.standard.data(forKey: Self.key(group: group)) else {
                     event(.success([]))
                     return Disposables.create()
                 }
-                
+
                 let drillCategories = try? JSONDecoder().decode([DrillCategory].self, from: data)
-                
+
                 event(.success(drillCategories ?? []))
-                
+
                 return Disposables.create()
             }
+    }
+
+    static func key(group: FitnessGroup) -> String {
+        Constants.drillCategoriesKey + "_" + group.cacheKey
     }
 }

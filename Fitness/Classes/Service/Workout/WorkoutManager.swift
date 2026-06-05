@@ -35,15 +35,15 @@ final class WorkoutManager {
 // MARK: WorkoutManagerProtocol
 extension WorkoutManager: WorkoutManagerProtocol {
     func obtainFocusZones(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[FocusZone]> {
-        forceUpdate ? loadFocusZones(group: group, save: save) : cachedFocusZones()
+        forceUpdate ? loadFocusZones(group: group, save: save) : cachedFocusZones(group: group)
     }
-    
+
     func obtainWorkoutSteps(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[WorkoutStep]> {
-        forceUpdate ? loadWorkoutSteps(group: group, save: save) : cachedWorkoutSteps()
+        forceUpdate ? loadWorkoutSteps(group: group, save: save) : cachedWorkoutSteps(group: group)
     }
-    
+
     func obtainWorkoutCovers(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[WorkoutCover]> {
-        forceUpdate ? loadWorkoutCovers(group: group, save: save) : cachedWorkoutCovers()
+        forceUpdate ? loadWorkoutCovers(group: group, save: save) : cachedWorkoutCovers(group: group)
     }
     
     func obtainWorkoutTemplate(coverId: Int, levelId: Int) -> Single<WorkoutTemplate?> {
@@ -206,14 +206,14 @@ private extension WorkoutManager {
                 guard save, let data = try? JSONEncoder().encode(focusZones) else {
                     return
                 }
-                
-                UserDefaults.standard.set(data, forKey: Constants.focusZones)
+
+                UserDefaults.standard.set(data, forKey: Self.key(Constants.focusZones, group: group))
             })
     }
-    
-    func cachedFocusZones() -> Single<[FocusZone]> {
+
+    func cachedFocusZones(group: FitnessGroup) -> Single<[FocusZone]> {
         Single<[FocusZone]>.create { event in
-            guard let data = UserDefaults.standard.data(forKey: Constants.focusZones) else {
+            guard let data = UserDefaults.standard.data(forKey: Self.key(Constants.focusZones, group: group)) else {
                 event(.success([]))
                 return Disposables.create()
             }
@@ -244,14 +244,14 @@ private extension WorkoutManager {
                 guard save, let data = try? JSONEncoder().encode(workoutSteps) else {
                     return
                 }
-                
-                UserDefaults.standard.set(data, forKey: Constants.workoutSteps)
+
+                UserDefaults.standard.set(data, forKey: Self.key(Constants.workoutSteps, group: group))
             })
     }
-    
-    func cachedWorkoutSteps() -> Single<[WorkoutStep]> {
+
+    func cachedWorkoutSteps(group: FitnessGroup) -> Single<[WorkoutStep]> {
         Single<[WorkoutStep]>.create { event in
-            guard let data = UserDefaults.standard.data(forKey: Constants.workoutSteps) else {
+            guard let data = UserDefaults.standard.data(forKey: Self.key(Constants.workoutSteps, group: group)) else {
                 event(.success([]))
                 return Disposables.create()
             }
@@ -282,23 +282,27 @@ private extension WorkoutManager {
                 guard save, let data = try? JSONEncoder().encode(workoutCovers) else {
                     return
                 }
-                
-                UserDefaults.standard.set(data, forKey: Constants.workoutCovers)
+
+                UserDefaults.standard.set(data, forKey: Self.key(Constants.workoutCovers, group: group))
             })
     }
-    
-    func cachedWorkoutCovers() -> Single<[WorkoutCover]> {
+
+    func cachedWorkoutCovers(group: FitnessGroup) -> Single<[WorkoutCover]> {
         Single<[WorkoutCover]>.create { event in
-            guard let data = UserDefaults.standard.data(forKey: Constants.workoutCovers) else {
+            guard let data = UserDefaults.standard.data(forKey: Self.key(Constants.workoutCovers, group: group)) else {
                 event(.success([]))
                 return Disposables.create()
             }
             
             let workoutCovers = try? JSONDecoder().decode([WorkoutCover].self, from: data)
-            
+
             event(.success(workoutCovers ?? []))
-            
+
             return Disposables.create()
         }
+    }
+
+    static func key(_ base: String, group: FitnessGroup) -> String {
+        base + "_" + group.cacheKey
     }
 }

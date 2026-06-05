@@ -80,4 +80,19 @@ enum FitnessGroup: Codable, CaseIterable {
             return "7gOuz7NvJpQYVVCUkF69"
         }
     }
+
+    var cacheKey: String {
+        switch self {
+        case .calisthenics:
+            return "calisthenics"
+        case .chairYoga:
+            return "chair_yoga"
+        case .somatic:
+            return "somatic"
+        case .stretching:
+            return "stretching"
+        case .wallPilates:
+            return "wall_pilates"
+        }
+    }
 }

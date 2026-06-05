@@ -49,6 +49,18 @@ final class OFocusZoneView: OSlideView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func moveToThis() {
+        super.moveToThis()
+        
+        workoutManager
+            .obtainFocusZones(forceUpdate: false)
+            .asDriver(onErrorJustReturn: [])
+            .drive(Binder(self) { base, focusZones in
+                base.focusZones = focusZones
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: OGenderViewDelegate
@@ -69,14 +81,6 @@ extension OFocusZoneView: OGenderViewDelegate {
 private extension OFocusZoneView {
     func initialize() {
         backgroundColor = Appearance.main100
-        
-        workoutManager
-            .obtainFocusZones(forceUpdate: false)
-            .asDriver(onErrorJustReturn: [])
-            .drive(Binder(self) { base, focusZones in
-                base.focusZones = focusZones
-            })
-            .disposed(by: disposeBag)
     }
     
     @objc

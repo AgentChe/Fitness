@@ -8,6 +8,8 @@
 import Alamofire
 
 struct SetRequest: APIRequestBody {
+    let domain: String
+    let apiKey: String
     let userToken: String
     let skillLevel: Int?
     let weekSchedule: [Int]?
@@ -15,18 +17,18 @@ struct SetRequest: APIRequestBody {
     let focusZones: [Int]?
     let timezone: String?
     let gender: Int?
-    
+
     var url: String {
-        GlobalDefinitions.domain + "/api/users/set"
+        domain + "/api/users/set"
     }
-    
+
     var method: HTTPMethod {
         .post
     }
-    
+
     var parameters: Parameters? {
         var params: [String: Any] = [
-            "_api_key": GlobalDefinitions.apiKey,
+            "_api_key": apiKey,
             "_user_token": userToken
         ]
         

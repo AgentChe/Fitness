@@ -62,8 +62,10 @@ extension ProfileManager: ProfileManagerProtocol {
         }
         
         let timezone = TimeZone.current.identifier
-        
+
         let request = SetRequest(
+            domain: group.domain,
+            apiKey: group.apiKey,
             userToken: userToken,
             skillLevel: skillLevelId,
             weekSchedule: weekScheduleDays,
@@ -72,21 +74,21 @@ extension ProfileManager: ProfileManagerProtocol {
             timezone: timezone,
             gender: gender?.code
         )
-        
+
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
             .do(onSuccess: { [weak self] in
-                self?.store(skillLevelId: skillLevelId)
-                self?.store(gender: gender)
-                self?.store(weekSchedule: weekSchedule)
-                self?.store(drillsIds: drillsIds)
-                self?.store(focusZonesIds: focusZonesIds)
+                self?.store(skillLevelId: skillLevelId, group: group)
+                self?.store(gender: gender, group: group)
+                self?.store(weekSchedule: weekSchedule, group: group)
+                self?.store(drillsIds: drillsIds, group: group)
+                self?.store(focusZonesIds: focusZonesIds, group: group)
             })
     }
-    
+
     func obtainProfile(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<Profile?> {
-        forceUpdate ? loadProfile(group: group, save: save) : cachedProfile()
+        forceUpdate ? loadProfile(group: group, save: save) : cachedProfile(group: group)
     }
     
     func syncTokens(group: FitnessGroup, oldToken: String, newToken: String) -> Single<Void> {
@@ -117,6 +119,10 @@ extension ProfileManager: ProfileManagerProtocol {
 
 // MARK: Private
 private extension ProfileManager {
+    static func key(_ base: String, group: FitnessGroup) -> String {
+        base + "_" + group.cacheKey
+    }
+    
     func loadProfile(group: FitnessGroup, save: Bool) -> Single<Profile?> {
         guard let userToken = sessionManager.getSession()?.userToken else {
             return .error(SignError.tokenNotFound)
@@ -133,23 +139,23 @@ private extension ProfileManager {
             .map { GetProfileResponse.map(from: $0) }
             .do(onSuccess: { [weak self] profile in
                 if save {
-                    self?.store(skillLevelId: profile?.skillLevelId)
-                    self?.store(weekSchedule: profile?.weekSchedule)
-                    self?.store(drillsIds: profile?.drillsIds)
-                    self?.store(focusZonesIds: profile?.focusZonesIds)
-                    self?.store(gender: profile?.gender)
+                    self?.store(skillLevelId: profile?.skillLevelId, group: group)
+                    self?.store(weekSchedule: profile?.weekSchedule, group: group)
+                    self?.store(drillsIds: profile?.drillsIds, group: group)
+                    self?.store(focusZonesIds: profile?.focusZonesIds, group: group)
+                    self?.store(gender: profile?.gender, group: group)
                 }
             })
     }
-    
-    func cachedProfile() -> Single<Profile?> {
+
+    func cachedProfile(group: FitnessGroup) -> Single<Profile?> {
         Single
             .zip(
-                cachedSkillLevelId(),
-                cachedGender(),
-                cachedWeekSchedule(),
-                cachedDrillsIds(),
-                cachedFocusZonesIds()
+                cachedSkillLevelId(group: group),
+                cachedGender(group: group),
+                cachedWeekSchedule(group: group),
+                cachedDrillsIds(group: group),
+                cachedFocusZonesIds(group: group)
             )
             .map { skillLevelId, gender, weekSchedule, drillsIds, focusZonesIds -> Profile in
                 Profile(skillLevelId: skillLevelId,
@@ -159,108 +165,108 @@ private extension ProfileManager {
                         focusZonesIds: focusZonesIds)
             }
     }
-    
-    func store(skillLevelId: Int?) {
+
+    func store(skillLevelId: Int?, group: FitnessGroup) {
         guard let skillLevelId = skillLevelId else {
             return
         }
-        
-        UserDefaults.standard.set(skillLevelId, forKey: Constants.skillLevelId)
-        
+
+        UserDefaults.standard.set(skillLevelId, forKey: Self.key(Constants.skillLevelId, group: group))
+
         ProfileMediator.shared.notify(skillLevelId: skillLevelId)
     }
-    
-    func cachedSkillLevelId() -> Single<Int?> {
+
+    func cachedSkillLevelId(group: FitnessGroup) -> Single<Int?> {
         Single<Int?>.create { event in
-            let skillLevelId = UserDefaults.standard.value(forKey: Constants.skillLevelId) as? Int
-            
+            let skillLevelId = UserDefaults.standard.value(forKey: Self.key(Constants.skillLevelId, group: group)) as? Int
+
             event(.success(skillLevelId))
-            
+
             return Disposables.create()
         }
     }
-    
-    func store(weekSchedule: WeekSchedule?) {
+
+    func store(weekSchedule: WeekSchedule?, group: FitnessGroup) {
         guard let weekSchedule = weekSchedule else {
             return
         }
-        
+
         let data = try? JSONEncoder().encode(weekSchedule)
-        
-        UserDefaults.standard.set(data, forKey: Constants.weekSchedule)
-        
+
+        UserDefaults.standard.set(data, forKey: Self.key(Constants.weekSchedule, group: group))
+
         ProfileMediator.shared.notify(weekSchedule: weekSchedule)
     }
-    
-    func cachedWeekSchedule() -> Single<WeekSchedule?> {
+
+    func cachedWeekSchedule(group: FitnessGroup) -> Single<WeekSchedule?> {
         Single<WeekSchedule?>.create { event in
-            guard let data = UserDefaults.standard.data(forKey: Constants.weekSchedule) else {
+            guard let data = UserDefaults.standard.data(forKey: Self.key(Constants.weekSchedule, group: group)) else {
                 event(.success(nil))
                 return Disposables.create()
             }
-            
+
             let weekSchedule = try? JSONDecoder().decode(WeekSchedule.self, from: data)
-            
+
             event(.success(weekSchedule))
-            
+
             return Disposables.create()
         }
     }
-    
-    func store(drillsIds: [Int]?) {
+
+    func store(drillsIds: [Int]?, group: FitnessGroup) {
         guard let drillsIds = drillsIds else {
             return
         }
-        
-        UserDefaults.standard.set(drillsIds, forKey: Constants.drillsIds)
-        
+
+        UserDefaults.standard.set(drillsIds, forKey: Self.key(Constants.drillsIds, group: group))
+
         ProfileMediator.shared.notify(drillsIds: drillsIds)
     }
-    
-    func cachedDrillsIds() -> Single<[Int]?> {
+
+    func cachedDrillsIds(group: FitnessGroup) -> Single<[Int]?> {
         Single<[Int]?>.create { event in
-            let drillsIds = UserDefaults.standard.value(forKey: Constants.drillsIds) as? [Int]
-            
+            let drillsIds = UserDefaults.standard.value(forKey: Self.key(Constants.drillsIds, group: group)) as? [Int]
+
             event(.success(drillsIds))
-            
+
             return Disposables.create()
         }
     }
-    
-    func store(focusZonesIds: [Int]?) {
+
+    func store(focusZonesIds: [Int]?, group: FitnessGroup) {
         guard let focusZonesIds = focusZonesIds else {
             return
         }
-        
-        UserDefaults.standard.set(focusZonesIds, forKey: Constants.focusZonesIds)
-        
+
+        UserDefaults.standard.set(focusZonesIds, forKey: Self.key(Constants.focusZonesIds, group: group))
+
         ProfileMediator.shared.notify(focusZonesIds: focusZonesIds)
     }
-    
-    func cachedFocusZonesIds() -> Single<[Int]?> {
+
+    func cachedFocusZonesIds(group: FitnessGroup) -> Single<[Int]?> {
         Single<[Int]?>.create { event in
-            let focusZonesIds = UserDefaults.standard.value(forKey: Constants.focusZonesIds) as? [Int]
-            
+            let focusZonesIds = UserDefaults.standard.value(forKey: Self.key(Constants.focusZonesIds, group: group)) as? [Int]
+
             event(.success(focusZonesIds))
-            
+
             return Disposables.create()
         }
     }
-    
-    func store(gender: Gender?) {
+
+    func store(gender: Gender?, group: FitnessGroup) {
         guard let gender else {
             return
         }
-        
+
         UserDefaults.standard.set(gender.code, forKey: Constants.gender)
     }
-    
-    func cachedGender() -> Single<Gender?> {
+
+    func cachedGender(group: FitnessGroup) -> Single<Gender?> {
         Single<Gender?>.create { event in
             let genderCode = UserDefaults.standard.value(forKey: Constants.gender) as? Int
             let gender = genderCode.flatMap { Gender(code: $0)}
             event(.success(gender))
-            
+
             return Disposables.create()
         }
     }

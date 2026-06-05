@@ -8,8 +8,8 @@
 import Foundation
 
 final class GlobalDefinitions {
-    static let domain = FitnessGroup.current.domain
-    static let apiKey = FitnessGroup.current.apiKey
+    static var domain: String { FitnessGroup.current.domain }
+    static var apiKey: String { FitnessGroup.current.apiKey }
     
     static let otterScaleHost = "https://api.korrekted.com"
     static let otterScaleApiKey = "vdOg9Izc5iKZqRDB"

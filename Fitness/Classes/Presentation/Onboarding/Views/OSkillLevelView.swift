@@ -35,12 +35,9 @@ final class OSkillLevelView: OSlideView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-// MARK: Private
-private extension OSkillLevelView {
-    func initialize() {
-        backgroundColor = Appearance.main100
+    
+    override func moveToThis() {
+        super.moveToThis()
         
         contentManager
             .obtainLevels(forceUpdate: false)
@@ -51,6 +48,13 @@ private extension OSkillLevelView {
                 base.update(sender: base.slider)
             })
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: Private
+private extension OSkillLevelView {
+    func initialize() {
+        backgroundColor = Appearance.main100
     }
     
     @objc

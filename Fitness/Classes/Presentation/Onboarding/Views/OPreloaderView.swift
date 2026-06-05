@@ -64,12 +64,20 @@ private extension OPreloaderView {
         }
         
         func source() -> Single<Void> {
-            profileManager
-                .set(skillLevelId: data.skillLevel.id,
-                     weekSchedule: data.weekSchedule,
-                     drillsIds: data.drillCategories,
-                     focusZonesIds: data.focusZones.map { $0.id },
-                     gender: data.gender)
+            let requests = FitnessGroup.allCases
+                .map { group -> Single<Void> in
+                    let isCurrent = group == FitnessGroup.current
+
+                    return profileManager
+                        .set(group: group,
+                             skillLevelId: isCurrent ? data.skillLevel.id : nil,
+                             weekSchedule: isCurrent ? data.weekSchedule : nil,
+                             drillsIds: isCurrent ? data.drillCategories : nil,
+                             focusZonesIds: isCurrent ? data.focusZones.map { $0.id } : nil,
+                             gender: data.gender)
+                }
+
+            return Single.zip(requests).mapToVoid()
         }
         
         func error(err: Error) -> Observable<Void> {

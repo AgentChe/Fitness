@@ -37,7 +37,7 @@ extension ContentManager: ContentManagerProtocol {
     }
     
     func obtainLevels(group: FitnessGroup = FitnessGroup.current, forceUpdate: Bool, save: Bool = true) -> Single<[SkillLevel]> {
-        forceUpdate ? loadLevels(group: group, save: save) : cachedLevels()
+        forceUpdate ? loadLevels(group: group, save: save) : cachedLevels(group: group)
     }
 }
 
@@ -61,23 +61,27 @@ private extension ContentManager {
                 guard save, let data = try? JSONEncoder().encode(levels) else {
                     return
                 }
-                
-                UserDefaults.standard.set(data, forKey: Constants.skillLevels)
+
+                UserDefaults.standard.set(data, forKey: Self.key(group: group))
             })
     }
-    
-    func cachedLevels() -> Single<[SkillLevel]> {
+
+    func cachedLevels(group: FitnessGroup) -> Single<[SkillLevel]> {
         Single<[SkillLevel]>.create { event in
-            guard let data = UserDefaults.standard.data(forKey: Constants.skillLevels) else {
+            guard let data = UserDefaults.standard.data(forKey: Self.key(group: group)) else {
                 event(.success([]))
                 return Disposables.create()
             }
-            
+
             let levels = try? JSONDecoder().decode([SkillLevel].self, from: data)
-            
+
             event(.success(levels ?? []))
-            
+
             return Disposables.create()
         }
+    }
+
+    static func key(group: FitnessGroup) -> String {
+        Constants.skillLevels + "_" + group.cacheKey
     }
 }
