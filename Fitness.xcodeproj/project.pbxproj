@@ -41,7 +41,6 @@
 		DECA89C02CF9D2F300BA5090 /* ScheduleWorkoutResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89A72CF9D2F300BA5090 /* ScheduleWorkoutResponse.swift */; };
 		DECA89C12CF9D2F300BA5090 /* PushNotificationsAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA881B2CF9D2F300BA5090 /* PushNotificationsAuthorizationStatus.swift */; };
 		DECA89C22CF9D2F300BA5090 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA896D2CF9D2F300BA5090 /* Profile.swift */; };
-		DECA89C32CF9D2F300BA5090 /* BranchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA87F92CF9D2F300BA5090 /* BranchManager.swift */; };
 		DECA89C42CF9D2F300BA5090 /* DrillTrainingInstructionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA885D2CF9D2F300BA5090 /* DrillTrainingInstructionViewModel.swift */; };
 		DECA89C52CF9D2F300BA5090 /* PaygateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88B02CF9D2F300BA5090 /* PaygateView.swift */; };
 		DECA89C62CF9D2F300BA5090 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88A72CF9D2F300BA5090 /* OnboardingViewModel.swift */; };
@@ -89,7 +88,6 @@
 		DECA89F02CF9D2F300BA5090 /* ObservableRetrySingle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88262CF9D2F300BA5090 /* ObservableRetrySingle.swift */; };
 		DECA89F12CF9D2F300BA5090 /* DrillTrainingInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA885C2CF9D2F300BA5090 /* DrillTrainingInstructionViewController.swift */; };
 		DECA89F22CF9D2F300BA5090 /* PaygateOptionLineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA89552CF9D2F300BA5090 /* PaygateOptionLineComponent.swift */; };
-		DECA89F32CF9D2F300BA5090 /* AmplitudeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA87F82CF9D2F300BA5090 /* AmplitudeManager.swift */; };
 		DECA89F42CF9D2F300BA5090 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA882D2CF9D2F300BA5090 /* AppDelegate.swift */; };
 		DECA89F52CF9D2F300BA5090 /* DTITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA88582CF9D2F300BA5090 /* DTITableView.swift */; };
 		DECA89F62CF9D2F300BA5090 /* HomeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECA887F2CF9D2F300BA5090 /* HomeTableView.swift */; };
@@ -355,8 +353,6 @@
 		DECA87EF2CF9D17600BA5090 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DECA87F02CF9D17600BA5090 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DECA87F12CF9D17600BA5090 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DECA87F82CF9D2F300BA5090 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
-		DECA87F92CF9D2F300BA5090 /* BranchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchManager.swift; sourceTree = "<group>"; };
 		DECA87FA2CF9D2F300BA5090 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		DECA87FC2CF9D2F300BA5090 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DECA87FD2CF9D2F300BA5090 /* RequestReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
@@ -755,8 +751,6 @@
 		DECA87FB2CF9D2F300BA5090 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				DECA87F82CF9D2F300BA5090 /* AmplitudeManager.swift */,
-				DECA87F92CF9D2F300BA5090 /* BranchManager.swift */,
 				DECA87FA2CF9D2F300BA5090 /* FacebookManager.swift */,
 			);
 			path = Analytics;
@@ -2272,9 +2266,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Fitness/Pods-Fitness-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Fitness/Pods-Fitness-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2308,7 +2306,6 @@
 				DECA89C02CF9D2F300BA5090 /* ScheduleWorkoutResponse.swift in Sources */,
 				DECA89C12CF9D2F300BA5090 /* PushNotificationsAuthorizationStatus.swift in Sources */,
 				DECA89C22CF9D2F300BA5090 /* Profile.swift in Sources */,
-				DECA89C32CF9D2F300BA5090 /* BranchManager.swift in Sources */,
 				DECA89C42CF9D2F300BA5090 /* DrillTrainingInstructionViewModel.swift in Sources */,
 				DECA89C52CF9D2F300BA5090 /* PaygateView.swift in Sources */,
 				DECA89C62CF9D2F300BA5090 /* OnboardingViewModel.swift in Sources */,
@@ -2356,7 +2353,6 @@
 				DECA89F02CF9D2F300BA5090 /* ObservableRetrySingle.swift in Sources */,
 				DECA89F12CF9D2F300BA5090 /* DrillTrainingInstructionViewController.swift in Sources */,
 				DECA89F22CF9D2F300BA5090 /* PaygateOptionLineComponent.swift in Sources */,
-				DECA89F32CF9D2F300BA5090 /* AmplitudeManager.swift in Sources */,
 				DECA89F42CF9D2F300BA5090 /* AppDelegate.swift in Sources */,
 				DECA89F52CF9D2F300BA5090 /* DTITableView.swift in Sources */,
 				DECA89F62CF9D2F300BA5090 /* HomeTableView.swift in Sources */,
@@ -2634,7 +2630,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z2WD4P9PA4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2650,7 +2646,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = train.fitness;
 				PRODUCT_NAME = "Train Fitness.";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2673,7 +2669,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = Z2WD4P9PA4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2689,7 +2685,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = train.fitness;
 				PRODUCT_NAME = "Train Fitness.";
 				PROVISIONING_PROFILE_SPECIFIER = "";

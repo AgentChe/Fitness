@@ -54,15 +54,15 @@ enum FitnessGroup: Codable, CaseIterable {
     var domain: String {
         switch self {
         case .calisthenics:
-            return "https://calisthenics.cocorporateapps.com"
+            return "https://calisthenics.thinkaboutapps.com"
         case .chairYoga:
-            return "https://chair.cocorporateapps.com"
+            return "https://chair.thinkaboutapps.com"
         case .somatic:
-            return "https://somatic.cocorporateapps.com"
+            return "https://somatic.thinkaboutapps.com"
         case .stretching:
-            return "https://stretching.cocorporateapps.com"
+            return "https://stretching.thinkaboutapps.com"
         case .wallPilates:
-            return "https://pilates.cocorporateapps.com"
+            return "https://pilates.thinkaboutapps.com"
         }
     }
     
